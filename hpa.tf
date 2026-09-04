@@ -9,6 +9,7 @@ resource "kubernetes_horizontal_pod_autoscaler_v2" "nginx" {
     scale_target_ref {
       kind = "Deployment"
       name = kubernetes_deployment_v1.nginx.metadata[0].name
+      api_version = "apps/v1"
     }
     metric {
       type = "Resource"
