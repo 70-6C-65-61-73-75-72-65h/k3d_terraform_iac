@@ -1,27 +1,27 @@
 resource "kubernetes_deployment_v1" "nginx" {
   metadata {
-    name = "nginx"
-    namespace = kubernetes_namespace_v1.app.metadata[0].name
+    name = var.deployment_name
+    namespace = var.namespace_name
   }
   spec {
     replicas = 1
     selector {
       match_labels = {
-        app = "nginx"
+        app = var.deployment_name
       }
     }
     template {
       metadata {
         labels = {
-          app = "nginx"
+          app = var.deployment_name
         }
       }
       spec {
         container {
           image = "nginx:1.31"
-          name = "nginx"
+          name = var.deployment_name
           port {
-            container_port = 80
+            container_port = var.container_port
           }
         }
       }

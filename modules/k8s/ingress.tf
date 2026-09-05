@@ -1,21 +1,21 @@
 resource "kubernetes_ingress_v1" "test-ingress" {
   metadata {
-    name = "ingress"
-    namespace = kubernetes_namespace_v1.app.metadata[0].name
+    name = var.ingress_name
+    namespace = var.namespace_name
   }
   spec {
-    ingress_class_name = "traefik"
+    ingress_class_name = var.ingress_classname
     rule {
-      host = "boutique.example.com"
+      host = var.ingress_hostname
       http {
          path {
           path      = "/"
           path_type = "Prefix"
           backend {
             service {
-              name = kubernetes_service_v1.nginx.metadata[0].name
+              name = var.service_name
               port {
-                number = 80
+                number = var.service_port
               }
             }
           }

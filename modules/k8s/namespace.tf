@@ -1,5 +1,5 @@
 resource "kubernetes_namespace_v1" "app" {
   metadata {
-    name = "nginx-app"
+    name = var.namespace_name
   }
 }

@@ -1,17 +1,17 @@
 resource "kubernetes_service_v1" "nginx" {
   metadata {
-    name = "nginx"
-    namespace = kubernetes_namespace_v1.app.metadata[0].name
+    name = var.service_name
+    namespace = var.namespace_name
   }
 
   spec {
     type = "ClusterIP"
     selector = {
-      app = "nginx"
+      app = var.service_name
     }
     port {
-      port = 80
-      target_port = 80
+      port = var.service_port
+      target_port = var.container_port
       name = "http"
       protocol = "TCP"
       app_protocol = "http"
